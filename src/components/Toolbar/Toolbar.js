@@ -8,11 +8,17 @@ export class Toolbar extends Element {
     this.onAdd = this.onAdd.bind(this);
 
     this.addButton = this.shadowRoot.querySelector('#add');
+    this.input = this.shadowRoot.querySelector('[type="text"]');
+
     this.addButton.addEventListener('click', this.onAdd);
   }
 
   onAdd() {
-    console.log(this);
+    this.store.create('todos', {
+      name: this.input.value,
+    });
+
+    this.input.value = '';
   }
 }
 

@@ -6,4 +6,8 @@ export class Element extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.template = templates[name];
   }
+
+  get store() {
+    return window.store;
+  }
 }

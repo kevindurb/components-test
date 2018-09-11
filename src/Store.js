@@ -34,6 +34,8 @@ export class Store {
       ...collection,
       item,
     ]);
+
+    this.notify(name);
   }
 
   read(name, query = {}) {
@@ -54,6 +56,7 @@ export class Store {
     });
 
     this.setCollection(name, updatedCollection);
+    this.notify(name);
   }
 
   delete(name, query) {
@@ -64,6 +67,7 @@ export class Store {
     });
 
     this.setCollection(name, filteredCollection)
+    this.notify(name);
   }
 
   subscribe(name, cb) {
@@ -78,7 +82,7 @@ export class Store {
   notify(name) {
     this.subscribers.forEach((sub) => {
       if (sub.name === name) {
-        cb();
+        sub.cb();
       }
     });
   }
